@@ -1,40 +1,15 @@
-body {
-    font-family: 'Open Sans', sans-serif;
-    max-width: 800px;
-    margin: 1em auto;
-}
-
-@media print {
-    body {
-        font-size: 12px;
-    }
-    td {
-        font-size: 12px;
-    }
-}
-
-/* Links */
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-a:visited {
-    color: inherit;
-}
-
 /* Tables */
-table {
+.resume table {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
 }
 
-th {
+.resume th {
     padding: 0.3em;
 }
 
-td.note {
+.resume td.note {
     font-size: 0.8em;
     font-style: italic;
     text-align: left;
@@ -42,44 +17,44 @@ td.note {
 }
 
 /* Language tables */
-td.level {
+.resume td.level {
     border: 1px dashed #e9e9e9;
     padding: 0.3em;
 }
 
-td.language {
+.resume td.language {
     border: none;
 }
 
-.languageLevelDescription {
+.resume .languageLevelDescription {
     font-size: 0.8em;
     color: gray;
 }
 
 /* Header with personal info */
-.header {
+.resume .header {
     text-align: center;
 }
 
-.nameInfo {
+.resume .nameInfo {
     text-transform: uppercase;
     font-weight: normal;
 }
 
-.personalDescription {
+.resume .personalDescription {
     margin: 1.5em auto;
 }
 
-.icon {
+.resume .icon {
     margin: auto 10px;
 }
 
 /* Sections */
-.section {
+.resume .section {
     overflow: hidden;
 }
 
-.section .name {
+.resume .section .name {
     text-align: center;
     border: 1px solid #DDD;
     border-left: 0;
@@ -87,27 +62,27 @@ td.language {
     padding: 5px 0;
 }
 
-.section .content {
+.resume .section .content {
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: 1em;
 }
 
-.section .heading {
+.resume .section .heading {
     margin-bottom: 10px;
 }
 
-.section .title {
+.resume .section .title {
     font-size: 1.25em;
     font-weight: bold;
 }
 
-.section .subtitle {
+.resume .section .subtitle {
     font-style: italic;
 }
 
-.section .content .dates {
+.resume .section .content .dates {
     grid-column: span 2;
     color: gray;
     font-size: 0.9em;
@@ -115,11 +90,11 @@ td.language {
     text-align: center;
 }
 
-.section .content .dates .toDate {
+.resume .section .content .dates .toDate {
     margin: 5px;
 }
 
-.section .content .data {
+.resume .section .content .data {
     grid-column: span 10;
 }
 

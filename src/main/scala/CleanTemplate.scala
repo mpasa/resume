@@ -171,27 +171,42 @@ object CleanTemplate extends Template {
     )
   }
 
-  override def render(resume: Resume): TypedTag[String] = {
+  override val styles: Seq[TypedTag[String]] = Seq(
+    tags2.style(raw(Source.fromResource("clean/styles.css").mkString))
+  )
+  
+  override val stylesPrintable: Seq[TypedTag[String]] = Seq(
+    tags2.style(raw(Source.fromResource("clean/styles-printable.css").mkString))
+  )
+
+  override def renderPrintable(resume: Resume): TypedTag[String] = {
     html(
       head(
         meta(charset := "UTF-8"),
-        tags2.style(raw(Source.fromResource("clean/styles.css").mkString)),
         link(rel := "stylesheet", href := "https://use.fontawesome.com/releases/v5.0.13/css/all.css"),
         link(rel := "stylesheet", href := "https://fonts.googleapis.com/css?family=Open+Sans"),
-        tags2.title(resume.personalData.name + " " + resume.personalData.lastName)
+        tags2.title(resume.personalData.name + " " + resume.personalData.lastName),
+        styles,
+        stylesPrintable
       ),
       body(
-        div(cls := "header")(
-          h1(cls := "nameInfo")(strong(Data.personal.name), " ", Data.personal.lastName),
-          contactInfo(Data.personal)
-        ),
-        div(cls := "personalDescription")(Data.personal.description),
-        section("Experience", resume.experience.map(job): _*),
-        section("Education", resume.education.map(education): _*),
-        section("Certifications", resume.certifications.map(certification): _*),
-        section("Languages", languagesTable(resume.languages)),
-        section("Publications", resume.publications.map(publication): _*)
+        render(resume)
       )
+    )
+  }
+
+  override def render(resume: Resume): TypedTag[String] = {
+    div(cls := "resume")(
+      div(cls := "header")(
+        h1(cls := "nameInfo")(strong(Data.personal.name), " ", Data.personal.lastName),
+        contactInfo(Data.personal)
+      ),
+      div(cls := "personalDescription")(Data.personal.description),
+      section("Experience", resume.experience.map(job): _*),
+      section("Education", resume.education.map(education): _*),
+      section("Certifications", resume.certifications.map(certification): _*),
+      section("Languages", languagesTable(resume.languages)),
+      section("Publications", resume.publications.map(publication): _*)
     )
   }
 }
