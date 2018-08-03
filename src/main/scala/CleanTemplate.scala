@@ -36,7 +36,7 @@ object CleanTemplate extends Template {
       div(cls := "dates")(
         div(dates.start.format(MONTH_FORMATTER)),
         icon("toDate fas fa-angle-down"),
-        div(dates.end.map(_.format(MONTH_FORMATTER)).getOrElse("Present").asInstanceOf[String])
+        div(StringFrag(dates.end.map(_.format(MONTH_FORMATTER)).getOrElse("Present")))
       )
     }
   }
