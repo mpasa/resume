@@ -1,3 +1,5 @@
+package me.mpasa.resume
+
 import java.time.YearMonth
 
 import model._

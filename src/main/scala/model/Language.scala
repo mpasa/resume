@@ -1,4 +1,4 @@
-package model
+package me.mpasa.resume.model
 
 /** Represents a language (native or foreign) spoken by a person */
 sealed trait Language

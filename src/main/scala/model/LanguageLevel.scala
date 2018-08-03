@@ -1,4 +1,4 @@
-package model
+package me.mpasa.resume.model
 
 /** Represents a level in a foreign language */
 abstract class LanguageLevel(val name: String, val description: String)

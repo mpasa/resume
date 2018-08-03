@@ -1,3 +1,5 @@
+package me.mpasa.resume
+
 import ammonite.ops._
 
 object Main {

@@ -1,4 +1,4 @@
-package model
+package me.mpasa.resume.model
 
 /** Represents the full resume of a person
   *

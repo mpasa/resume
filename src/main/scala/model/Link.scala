@@ -1,4 +1,4 @@
-package model
+package me.mpasa.resume.model
 
 /** Represents a link (anchor and URL)
   *

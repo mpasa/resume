@@ -1,4 +1,4 @@
-package model
+package me.mpasa.resume.model
 
 import scalatags.Text.TypedTag
 

@@ -1,4 +1,4 @@
-package model
+package me.mpasa.resume.model
 
 /** Represents the publication of a scientific paper
   *
