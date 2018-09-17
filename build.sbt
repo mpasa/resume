@@ -7,6 +7,6 @@ val root = project.in(file(".")).settings(
   ),
   libraryDependencies ++= Seq(
     "com.lihaoyi" %% "scalatags" % "0.6.7",
-    "com.lihaoyi" %% "ammonite-ops" % "1.1.2"
+    "com.lihaoyi" %% "ammonite-ops" % "1.2.1"
   )
 )
