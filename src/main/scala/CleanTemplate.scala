@@ -167,7 +167,8 @@ object CleanTemplate extends Template {
     div(
       a(href := s"mailto:${personal.email}", span(icon("icon fas fa-envelope"), personal.email)),
       a(href := personal.github.url)(icon("icon fab fa-github"), personal.github.anchor),
-      a(href := personal.twitter.url)(icon("icon fab fa-twitter"), personal.twitter.anchor)
+      a(href := personal.twitter.url)(icon("icon fab fa-twitter"), personal.twitter.anchor),
+      a(href := personal.webpage.url)(icon("icon fab fa-firefox"), personal.webpage.anchor)
     )
   }
 
@@ -179,6 +180,7 @@ object CleanTemplate extends Template {
     tags2.style(raw(Source.fromResource("clean/styles-printable.css").mkString))
   )
 
+  // Renders a full version of the resume without anything more in the page (ready to be printed out)
   override def renderPrintable(resume: Resume): TypedTag[String] = {
     html(
       head(
@@ -195,6 +197,7 @@ object CleanTemplate extends Template {
     )
   }
 
+  // Renders a resume within another page
   override def render(resume: Resume): TypedTag[String] = {
     div(cls := "resume")(
       div(cls := "header")(

@@ -18,6 +18,7 @@ object Data {
     email = "miguel.perez.pasalodos@gmail.com",
     github = Link(anchor = "mpasa", url = "https://github.com/mpasa"),
     twitter = Link(anchor = "Kamugo", url = "https://twitter.com/Kamugo"),
+    webpage = Link(anchor = "mpasa.me", url = "https://mpasa.me"),
     description = div(
       """
         I'm Miguel, a Computer Scientist from Barcelona. I'm passionate about data, functional programming (mainly
@@ -30,7 +31,6 @@ object Data {
   //--------------------------------------------------------------------------------------------------------------------
   //                                                    Experience
   //--------------------------------------------------------------------------------------------------------------------
-
 
   val dataEngineerTrovit = Job(
     company = "Trovit",
