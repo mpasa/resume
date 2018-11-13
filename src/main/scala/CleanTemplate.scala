@@ -243,7 +243,9 @@ class CleanTemplate(onePage: Boolean) extends Template {
 
       // One-page disclaimer
       onePage.option {
-        p(cls := "note", "Note: this is a one-page version of my resume. If you want to read more about me, you can check the full version on https://mpasa.me")
+        p(cls := "note")(
+          strong("Note"), ": this is a one-page version of my resume. If you want to read more about me, you can check the full version on https://mpasa.me/resume"
+        )
       }
     )
   }

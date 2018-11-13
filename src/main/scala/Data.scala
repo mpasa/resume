@@ -46,23 +46,24 @@ object Data {
       ),
       p(
         """
-          I led the keywords management pipeline. A keyword is just a set of tokens related to content. The goal of
-          the pipeline was to manage all the keywords, which were counted by hundreds of millions. It consisted of
-          different phases:
+          I led the keywords management and other related batch data pipelines. A keyword is just a set of tokens
+          related to content. The goal of the pipeline was to manage all the keywords and, thus, the visibility of
+          all the content to search engines. The total number of keywords exceeded the hundreds of millions, and the
+          pipeline consisted of different phases:
         """
       ),
       ol(
         li("Check if new keywords could be generated"),
-        li("Simulate the number of results of each keyword (the ones without content are useless)"),
+        li("Simulate the number of results of each keyword (the ones without a minimum quantity of content are useless)"),
         li("Categorize and contextualize the tokens (what does the keyword really mean?)"),
-        li("Relate keywords with each other (by hierarchy, clustering...)"),
+        li("Relate keywords with each other to generate linking (by hierarchy, clustering...)"),
         li("Check which keywords are worth indexing and generate a Solr index with them")
       ),
       p(
         s"""
           The pipeline was implemented using a hybrid """, strong("Hadoop-Spark"), """ batch pipeline. It was
           challenging in many ways: performance issues, lack of context (the same token could mean a lot of different
-          things), deal with different languages...
+          things), dealing with search engines performance, dealing with different languages, etc.
         """
       ),
     ),
@@ -96,9 +97,9 @@ object Data {
     description = div(
       p(
         """
-          I worked developing different new Web projects expected to be an important part of the company in the
+          I worked developing different experimental Web projects expected to be an important part of the company in the
           future. The most important one was the "Publish Your Ad" project, where users could post their own ads
-          directly on Trovit.
+          directly on Trovit (which was a pure aggregator before that).
         """
       )
     ), extra = div(
@@ -123,7 +124,7 @@ object Data {
         """
           I worked in the TSC (Signal Theory and Communications) department. I started helping to manage the
           department's data center (servers and network). Later on, I started developing both front-end and back-end
-          tools, which were used to improve the ICT management of the department.
+          web tools, which were used to improve the management of the department.
         """
       ),
     ),
