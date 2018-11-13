@@ -6,4 +6,8 @@ import scalatags.Text.TypedTag
 final case class Job(company: String,
                      title: String,
                      dates: Dates,
-                     description: TypedTag[String])
+                     description: TypedTag[String],
+                     extra: TypedTag[String]) {
+
+  def descriptionAll = Seq(description, extra)
+}

@@ -1,0 +1,12 @@
+.resume .section .content .dates {
+    grid-column: span 1;
+}
+
+.resume .section .content .data {
+    grid-column: span 11;
+}
+
+.note {
+    color: gray;
+    font-size: 0.9em;
+}

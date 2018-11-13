@@ -65,6 +65,8 @@ object Data {
           things), deal with different languages...
         """
       ),
+    ),
+    extra = div(
       p(strong("Other projects"), " I worked on:"),
       ul(
         li(
@@ -98,7 +100,8 @@ object Data {
           future. The most important one was the "Publish Your Ad" project, where users could post their own ads
           directly on Trovit.
         """
-      ),
+      )
+    ), extra = div(
       p("Some of the technologies I used were:"),
       ul(
         Seq(
@@ -123,6 +126,8 @@ object Data {
           tools, which were used to improve the ICT management of the department.
         """
       ),
+    ),
+    extra = div(
       p("Some of the technologies I used were:"),
       ul(
         Seq(

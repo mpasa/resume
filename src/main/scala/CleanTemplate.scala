@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter
 import model._
 import scalatags.Text.{TypedTag, tags2}
 import scalatags.Text.all._
+import mouse.boolean._
 
 import scala.io.Source
 
@@ -18,12 +19,14 @@ import scala.io.Source
   * - Languages
   * - Publications
   */
-object CleanTemplate extends Template {
+class CleanTemplate(onePage: Boolean) extends Template {
+
+  private val MONTH_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy")
+
 
   /** A lazy way to call a span for icons */
   private def icon(c: String) = span(cls := c)
 
-  private val MONTH_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy")
 
   /** Shows a div representing a [[Dates]] object
     * If the end date is not set, only the start date is shown
@@ -41,6 +44,7 @@ object CleanTemplate extends Template {
     }
   }
 
+
   /** A section is just a big title and content
     *
     * Examples of sections are: Work experience, education...
@@ -49,6 +53,7 @@ object CleanTemplate extends Template {
     h2(cls := "name")(title),
     div(content)
   )
+
 
   /** Generates the data of a section of something that have dates
     *
@@ -63,27 +68,33 @@ object CleanTemplate extends Template {
     )
   }
 
+
   /** Shows a section title with a subtitle */
   private def titleWithSubHeading(ttle: String, organization: String) = div(cls := "heading")(
     title(ttle),
     subtitle(organization)
   )
 
+
   /** Shows a section title. Titles are shown bigger that the surrounding text */
   private def title(title: String) = div(cls := "title")(title)
 
+
   /** Subtitle for a section title. They're shown a bit smaller  */
   private def subtitle(text: String) = div(cls := "subtitle")(text)
+
 
   /** Shows a job with its dates */
   private def job(job: Job) = {
     sectionDataWithDates(job)(_.dates) { job =>
       div(
         titleWithSubHeading(job.title, job.company),
-        job.description
+        if (onePage) job.description
+        else job.descriptionAll
       )
     }
   }
+
 
   /** Shows an education with its dates */
   private def education(education: Education) = {
@@ -96,6 +107,7 @@ object CleanTemplate extends Template {
     }
   }
 
+
   /** Shows a certification with its dates */
   private def certification(certification: Certification) = {
     sectionDataWithDates(certification)(_.dates) { certification =>
@@ -105,6 +117,7 @@ object CleanTemplate extends Template {
       )
     }
   }
+
 
   /** Shows a publication with its publication date */
   private def publication(publication: Publication) = {
@@ -122,6 +135,7 @@ object CleanTemplate extends Template {
       )
     }
   }
+
 
   /** Shows a table showing the native and foreign language levels
     *
@@ -172,13 +186,22 @@ object CleanTemplate extends Template {
     )
   }
 
-  override val styles: Seq[TypedTag[String]] = Seq(
-    tags2.style(raw(Source.fromResource("clean/styles.css").mkString))
-  )
-  
+
+  // A sequence of styles used by the template
+  override val styles: Seq[TypedTag[String]] = {
+    val normalStyles = tags2.style(raw(Source.fromResource("clean/styles.css").mkString))
+    val onePageStyles = tags2.style(raw(Source.fromResource("clean/styles-onepage.css").mkString))
+
+    if (onePage) Seq(normalStyles, onePageStyles)
+    else Seq(normalStyles)
+  }
+
+
+  // A sequence of styles used by the template only in the printable version
   override val stylesPrintable: Seq[TypedTag[String]] = Seq(
     tags2.style(raw(Source.fromResource("clean/styles-printable.css").mkString))
   )
+
 
   // Renders a full version of the resume without anything more in the page (ready to be printed out)
   override def renderPrintable(resume: Resume): TypedTag[String] = {
@@ -197,6 +220,7 @@ object CleanTemplate extends Template {
     )
   }
 
+
   // Renders a resume within another page
   override def render(resume: Resume): TypedTag[String] = {
     div(cls := "resume")(
@@ -207,9 +231,20 @@ object CleanTemplate extends Template {
       div(cls := "personalDescription")(Data.personal.description),
       section("Experience", resume.experience.map(job): _*),
       section("Education", resume.education.map(education): _*),
-      section("Certifications", resume.certifications.map(certification): _*),
-      section("Languages", languagesTable(resume.languages)),
-      section("Publications", resume.publications.map(publication): _*)
+
+      // Optional sections
+      (!onePage).option {
+        Seq(
+          section("Certifications", resume.certifications.map(certification): _*),
+          section("Languages", languagesTable(resume.languages)),
+          section("Publications", resume.publications.map(publication): _*)
+        )
+      },
+
+      // One-page disclaimer
+      onePage.option {
+        p(cls := "note", "Note: this is a one-page version of my resume. If you want to read more about me, you can check the full version on https://mpasa.me")
+      }
     )
   }
 }

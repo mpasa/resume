@@ -6,7 +6,8 @@ val root = project.in(file(".")).settings(
     "-Xfatal-warnings"
   ),
   libraryDependencies ++= Seq(
-    "com.lihaoyi" %% "scalatags" % "0.6.7",
-    "com.lihaoyi" %% "ammonite-ops" % "1.3.2"
+    "com.lihaoyi"   %% "scalatags"    % "0.6.7",
+    "com.lihaoyi"   %% "ammonite-ops" % "1.3.2",
+    "org.typelevel" %% "mouse"        % "0.19"
   )
 )
