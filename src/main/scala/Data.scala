@@ -54,27 +54,37 @@ object Data {
       ),
       ol(
         li("Check if new keywords could be generated"),
-        li("Simulate the number of results of each keyword (the ones without a minimum quantity of content are useless)"),
+        li(
+          "Simulate the number of results of each keyword (the ones without a minimum quantity of content are useless)"
+        ),
         li("Categorize and contextualize the tokens (what does the keyword really mean?)"),
         li("Relate keywords with each other to generate linking (by hierarchy, clustering...)"),
         li("Check which keywords are worth indexing and generate a Solr index with them")
       ),
       p(
         s"""
-          The pipeline was implemented using a hybrid """, strong("Hadoop-Spark"), """ batch pipeline. It was
+          The pipeline was implemented using a hybrid """,
+        strong("Hadoop-Spark"),
+        """ batch pipeline. It was
           challenging in many ways: performance issues, lack of context (the same token could mean a lot of different
           things), dealing with search engines performance, dealing with different languages, etc.
         """
-      ),
+      )
     ),
     extra = div(
       p(strong("Other projects"), " I worked on:"),
       ul(
         li(
           s"""
-             Ads categorization, deduplication, sorting and automatic expiration. """, strong("Kafka"), """, was used
-             to enqueue the downloaded ads. A """, strong("Hadoop"), """ ecosystem (YARN, HDFS and MapReduce) was used
-             to consume, process and analyse them. Finally, """, strong("Solr"), """ indices were built with all the
+             Ads categorization, deduplication, sorting and automatic expiration. """,
+          strong("Kafka"),
+          """, was used
+             to enqueue the downloaded ads. A """,
+          strong("Hadoop"),
+          """ ecosystem (YARN, HDFS and MapReduce) was used
+             to consume, process and analyse them. Finally, """,
+          strong("Solr"),
+          """ indices were built with all the
              processed information and deployed to production.
           """
         ),
@@ -82,7 +92,11 @@ object Data {
           s"""
              Stats processing. We used Kafka to enqueue impressions, clicks, e-mail openings and conversions from the
              site. Then, different Hadoop ETL pipelines processed the queues and extracted useful information for the
-             company. Finally, the data was persisted to """, strong("Hive"), """, """, strong("Impala"), """ or MySQL
+             company. Finally, the data was persisted to """,
+          strong("Hive"),
+          """, """,
+          strong("Impala"),
+          """ or MySQL
              so, it could be consumed more easily.
           """
         )
@@ -102,7 +116,8 @@ object Data {
           directly on Trovit (which was a pure aggregator before that).
         """
       )
-    ), extra = div(
+    ),
+    extra = div(
       p("Some of the technologies I used were:"),
       ul(
         Seq(
@@ -126,7 +141,7 @@ object Data {
           department's data center (servers and network). Later on, I started developing both front-end and back-end
           web tools, which were used to improve the management of the department.
         """
-      ),
+      )
     ),
     extra = div(
       p("Some of the technologies I used were:"),
@@ -153,17 +168,21 @@ object Data {
     organization = "Barcelona School of Informatics (FIB), Universitat Politècnica de Catalunya (UPC).",
     skills = p(
       s"""
-        Major in """, strong("Computing"), """. I was trained to assess the difficulty of computing problems, to
+        Major in """,
+      strong("Computing"),
+      """. I was trained to assess the difficulty of computing problems, to
         identify the most suitable machines, languages and programming paradigms, and to design and implement the best
         IT solution.
       """
     ),
-    notes = Some(p(
-      s"""
+    notes = Some(
+      p(
+        s"""
         I successfully finished different advanced computing modules, including Theory of Computation, Machine
         Learning, Advanced Algorithms and Distributed Intelligent Systems.
       """
-    ))
+      )
+    )
   )
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -177,7 +196,9 @@ object Data {
     skills = div(
       s"""
         I learned how machine learning algorithms could be adapted and used in large clusters of commodity machines.
-        Particularly, I used """, strong("Apache Spark"), """ to resolve different machine learning problems.
+        Particularly, I used """,
+      strong("Apache Spark"),
+      """ to resolve different machine learning problems.
       """
     )
   )
@@ -190,8 +211,7 @@ object Data {
     title = "Using Multi-Agent Systems to mediate in an assistive social network for elder population",
     date = Dates.single(YearMonth.of(2015, 10)),
     coAuthors = Seq("Cristian Barrué", "Ulises Cortés", "Atia Cortés", "Jonatan Moreno"),
-    abs =
-      """
+    abs = """
         Nowadays ubiquitous connectivity, portable computing, pervasive sensing, novel interfaces, cheap and fast
         computing units, and advances in robotic devices and actuators are changing our lives, our living
         environments, and our social interaction. To truly benefit the elderly and fragile population, commodities

@@ -23,10 +23,8 @@ class CleanTemplate(onePage: Boolean) extends Template {
 
   private val MONTH_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy")
 
-
   /** A lazy way to call a span for icons */
   private def icon(c: String) = span(cls := c)
-
 
   /** Shows a div representing a [[Dates]] object
     * If the end date is not set, only the start date is shown
@@ -44,7 +42,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
     }
   }
 
-
   /** A section is just a big title and content
     *
     * Examples of sections are: Work experience, education...
@@ -53,7 +50,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
     h2(cls := "name")(title),
     div(content)
   )
-
 
   /** Generates the data of a section of something that have dates
     *
@@ -68,21 +64,17 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
   }
 
-
   /** Shows a section title with a subtitle */
   private def titleWithSubHeading(ttle: String, organization: String) = div(cls := "heading")(
     title(ttle),
     subtitle(organization)
   )
 
-
   /** Shows a section title. Titles are shown bigger that the surrounding text */
   private def title(title: String) = div(cls := "title")(title)
 
-
   /** Subtitle for a section title. They're shown a bit smaller  */
   private def subtitle(text: String) = div(cls := "subtitle")(text)
-
 
   /** Shows a job with its dates */
   private def job(job: Job) = {
@@ -95,7 +87,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
     }
   }
 
-
   /** Shows an education with its dates */
   private def education(education: Education) = {
     sectionDataWithDates(education)(_.dates) { education =>
@@ -107,7 +98,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
     }
   }
 
-
   /** Shows a certification with its dates */
   private def certification(certification: Certification) = {
     sectionDataWithDates(certification)(_.dates) { certification =>
@@ -118,13 +108,13 @@ class CleanTemplate(onePage: Boolean) extends Template {
     }
   }
 
-
   /** Shows a publication with its publication date */
   private def publication(publication: Publication) = {
     sectionDataWithDates(publication)(_.date) { publication =>
       div(cls := "heading")(
         title(publication.title),
-        div("Co-authors: ",
+        div(
+          "Co-authors: ",
           if (publication.coAuthors.length > 1) {
             publication.coAuthors.init.mkString(", ") + " and " + publication.coAuthors.last
           } else {
@@ -135,7 +125,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
       )
     }
   }
-
 
   /** Shows a table showing the native and foreign language levels
     *
@@ -150,26 +139,28 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
 
     val languageRows = languages.map {
-      case NativeLanguage(language) => tr(
-        td(cls := "language", language),
-        td(cls := "level", colspan := 4, "Native")
-      )
-      case ForeignLanguage(language, reading, listening, writing, speaking) => tr(
-        td(cls := "language", language),
-        levelTD(reading),
-        levelTD(listening),
-        levelTD(writing),
-        levelTD(speaking)
-      )
+      case NativeLanguage(language) =>
+        tr(
+          td(cls := "language", language),
+          td(cls := "level", colspan := 4, "Native")
+        )
+      case ForeignLanguage(language, reading, listening, writing, speaking) =>
+        tr(
+          td(cls := "language", language),
+          levelTD(reading),
+          levelTD(listening),
+          levelTD(writing),
+          levelTD(speaking)
+        )
     }
-    val cefRow = tr(td(""), td(colspan := 4, cls := "note")("Common European Framework of Reference for Languages (CFE)"))
+    val cefRow =
+      tr(td(""), td(colspan := 4, cls := "note")("Common European Framework of Reference for Languages (CFE)"))
 
     table(
       thead(tr(Seq("", "Reading", "Listening", "Writing", "Speaking").map(th(_)))),
       tbody(languageRows :+ cefRow)
     )
   }
-
 
   /** Shows a row with contact information
     *
@@ -186,7 +177,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
   }
 
-
   // A sequence of styles used by the template
   override val styles: Seq[TypedTag[String]] = {
     val normalStyles = tags2.style(raw(Source.fromResource("clean/styles.css").mkString))
@@ -196,12 +186,10 @@ class CleanTemplate(onePage: Boolean) extends Template {
     else Seq(normalStyles)
   }
 
-
   // A sequence of styles used by the template only in the printable version
   override val stylesPrintable: Seq[TypedTag[String]] = Seq(
     tags2.style(raw(Source.fromResource("clean/styles-printable.css").mkString))
   )
-
 
   // Renders a full version of the resume without anything more in the page (ready to be printed out)
   override def renderPrintable(resume: Resume): TypedTag[String] = {
@@ -220,7 +208,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
   }
 
-
   // Renders a resume within another page
   override def render(resume: Resume): TypedTag[String] = {
     div(cls := "resume")(
@@ -231,7 +218,6 @@ class CleanTemplate(onePage: Boolean) extends Template {
       div(cls := "personalDescription")(Data.personal.description),
       section("Experience", resume.experience.map(job): _*),
       section("Education", resume.education.map(education): _*),
-
       // Optional sections
       (!onePage).option {
         Seq(
@@ -240,11 +226,11 @@ class CleanTemplate(onePage: Boolean) extends Template {
           section("Publications", resume.publications.map(publication): _*)
         )
       },
-
       // One-page disclaimer
       onePage.option {
         p(cls := "note")(
-          strong("Note"), ": this is a one-page version of my resume. If you want to read more about me, you can check the full version on https://mpasa.me/resume"
+          strong("Note"),
+          ": this is a one-page version of my resume. If you want to read more about me, you can check the full version on https://mpasa.me/resume"
         )
       }
     )

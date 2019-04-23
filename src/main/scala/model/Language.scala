@@ -11,8 +11,10 @@ final case class NativeLanguage(name: String) extends Language
   * It's separated into different skills using the European
   * [[https://en.wikipedia.org/wiki/Common_European_Framework_of_Reference_for_Languages CEF]] levels
   */
-final case class ForeignLanguage(name: String,
-                                 reading: LanguageLevel,
-                                 listening: LanguageLevel,
-                                 writing: LanguageLevel,
-                                 speaking: LanguageLevel) extends Language
+final case class ForeignLanguage(
+    name: String,
+    reading: LanguageLevel,
+    listening: LanguageLevel,
+    writing: LanguageLevel,
+    speaking: LanguageLevel
+) extends Language
