@@ -1,5 +1,7 @@
 val root = project.in(file(".")).settings(
   name := "Resume",
+  organization := "me.mpasa",
+  version := "0.1-SNAPSHOT",
   scalaVersion := "2.12.7",
   scalacOptions := Seq(
     "-deprecation",
