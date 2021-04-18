@@ -31,9 +31,9 @@ object Data {
   //--------------------------------------------------------------------------------------------------------------------
   //                                                    Experience
   //--------------------------------------------------------------------------------------------------------------------
-  
-  val leadDataEngineerPubNative = Job(
-    company = "PubNative",
+
+  val leadDataEngineerVerve = Job(
+    company = "Verve Group",
     title = "Lead Data Engineer",
     dates = Dates(YearMonth.of(2020, 2), None),
     description = div(""),
@@ -246,7 +246,8 @@ object Data {
 
   val resume = Resume(
     personalData = personal,
-    experience = Seq(leadDataEngineerPubNative, dataEngineerPubNative, dataEngineerTrovit, webDeveloperTrovit, webDeveloperUPC),
+    experience =
+      Seq(leadDataEngineerVerve, dataEngineerPubNative, dataEngineerTrovit, webDeveloperTrovit, webDeveloperUPC),
     education = Seq(upc),
     certifications = Seq(sparkML),
     languages = Seq(
