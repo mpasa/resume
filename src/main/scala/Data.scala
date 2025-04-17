@@ -32,16 +32,32 @@ object Data {
   //                                                    Experience
   //--------------------------------------------------------------------------------------------------------------------
 
+  val seniorEngineeringManagerVerve = Job(
+    company = "Verve",
+    title = "Senior Engineering Manager, Data Platform",
+    dates = Dates(YearMonth.of(2023, 9), Some(YearMonth.of(2025, 3))),
+    description = div(""),
+    extra = div("")
+  )
+  
+  val engManagerVerve = Job(
+    company = "Verve",
+    title = "Engineering Manager, Data Platform",
+    dates = Dates(YearMonth.of(2022, 11), Some(YearMonth.of(2023, 8))),
+    description = div(""),
+    extra = div("")
+  )
+
   val leadDataEngineerVerve = Job(
-    company = "Verve Group",
+    company = "Verve",
     title = "Lead Data Engineer",
-    dates = Dates(YearMonth.of(2020, 2), None),
+    dates = Dates(YearMonth.of(2020, 2), Some(YearMonth.of(2022, 10))),
     description = div(""),
     extra = div("")
   )
 
   val dataEngineerPubNative = Job(
-    company = "PubNative",
+    company = "Verve",
     title = "Data Engineer",
     dates = Dates(YearMonth.of(2019, 7), Some(YearMonth.of(2020, 1))),
     description = div(""),
@@ -246,8 +262,15 @@ object Data {
 
   val resume = Resume(
     personalData = personal,
-    experience =
-      Seq(leadDataEngineerVerve, dataEngineerPubNative, dataEngineerTrovit, webDeveloperTrovit, webDeveloperUPC),
+    experience = Seq(
+      seniorEngineeringManagerVerve,
+      engManagerVerve,
+      leadDataEngineerVerve, 
+      dataEngineerPubNative, 
+      dataEngineerTrovit, 
+      webDeveloperTrovit, 
+      webDeveloperUPC
+    ),
     education = Seq(upc),
     certifications = Seq(sparkML),
     languages = Seq(
