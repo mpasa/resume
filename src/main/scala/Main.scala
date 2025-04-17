@@ -1,6 +1,5 @@
 package me.mpasa.resume
 
-import ammonite.ops._
 import me.mpasa.resume.model.{Resume, Template}
 
 object Main {
@@ -11,8 +10,8 @@ object Main {
   private def writeResume(resume: Resume, name: String, template: Template) = {
     val html = template.renderPrintable(resume)
     val nameHtml = s"$name.html"
-    rm(pwd / "target" / nameHtml)
-    write.over(pwd / "target" / nameHtml, html.render)
+    os.remove(os.pwd / "target" / nameHtml)
+    os.write.over(os.pwd / "target" / nameHtml, html.render)
   }
 
   def main(args: Array[String]): Unit = {
