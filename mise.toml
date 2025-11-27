@@ -1,2 +1,2 @@
 [tools]
-java = "adoptopenjdk-11.0.20+101"
+java = "24.0.1"
