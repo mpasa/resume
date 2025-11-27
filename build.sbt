@@ -4,7 +4,7 @@ val root = project
     name := "Resume",
     organization := "me.mpasa",
     version := "0.1-SNAPSHOT",
-    scalaVersion := "2.13.5",
+    scalaVersion := "3.7.4",
     scalacOptions := Seq(
       "-deprecation",
       "-Xfatal-warnings"

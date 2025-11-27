@@ -216,14 +216,14 @@ class CleanTemplate(onePage: Boolean) extends Template {
         contactInfo(Data.personal)
       ),
       div(cls := "personalDescription")(Data.personal.description),
-      section("Experience", resume.experience.map(job): _*),
-      section("Education", resume.education.map(education): _*),
+      section("Experience", resume.experience.map(job)*),
+      section("Education", resume.education.map(education)*),
       // Optional sections
       (!onePage).option {
         Seq(
-          section("Certifications", resume.certifications.map(certification): _*),
+          section("Certifications", resume.certifications.map(certification)*),
           section("Languages", languagesTable(resume.languages)),
-          section("Publications", resume.publications.map(publication): _*)
+          section("Publications", resume.publications.map(publication)*)
         )
       },
       // One-page disclaimer
