@@ -8,7 +8,7 @@ final case class PersonalData(
     lastName: String,
     email: String,
     github: Link,
-    twitter: Link,
+    x: Link,
     webpage: Link,
     description: TypedTag[String]
 )

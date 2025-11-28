@@ -166,13 +166,13 @@ class CleanTemplate(onePage: Boolean) extends Template {
     *
     * - E-mail
     * - Github profile
-    * - Twitter profile
+    * - X profile
     */
   private def contactInfo(personal: PersonalData) = {
     div(
       a(href := s"mailto:${personal.email}", span(icon("icon fas fa-envelope"), personal.email)),
       a(href := personal.github.url)(icon("icon fab fa-github"), personal.github.anchor),
-      a(href := personal.twitter.url)(icon("icon fab fa-twitter"), personal.twitter.anchor),
+      a(href := personal.x.url)(icon("icon fab fa-x-twitter"), personal.x.anchor),
       a(href := personal.webpage.url)(icon("icon fab fa-firefox"), personal.webpage.anchor)
     )
   }
@@ -196,7 +196,7 @@ class CleanTemplate(onePage: Boolean) extends Template {
     html(
       head(
         meta(charset := "UTF-8"),
-        link(rel := "stylesheet", href := "https://use.fontawesome.com/releases/v5.0.13/css/all.css"),
+        link(rel := "stylesheet", href := "https://use.fontawesome.com/releases/v6.7.2/css/all.css"),
         link(rel := "stylesheet", href := "https://fonts.googleapis.com/css?family=Open+Sans"),
         tags2.title(resume.personalData.name + " " + resume.personalData.lastName),
         styles,

@@ -17,7 +17,7 @@ object Data {
     lastName = "Pérez Pasalodos",
     email = "miguel.perez.pasalodos@gmail.com",
     github = Link(anchor = "mpasa", url = "https://github.com/mpasa"),
-    twitter = Link(anchor = "Kamugo", url = "https://twitter.com/Kamugo"),
+    x = Link(anchor = "Kamugo", url = "https://x.com/Kamugo"),
     webpage = Link(anchor = "mpasa.me", url = "https://mpasa.me"),
     description = div(
       """
