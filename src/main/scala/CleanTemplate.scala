@@ -77,7 +77,7 @@ class CleanTemplate(onePage: Boolean) extends Template {
   private def subtitle(text: String) = div(cls := "subtitle")(text)
 
   /** Shows a job with its dates */
-  private def job(job: Job) = {
+  private def renderJob(job: Job) = {
     sectionDataWithDates(job)(_.dates) { job =>
       div(
         titleWithSubHeading(job.title, job.company),
@@ -85,6 +85,18 @@ class CleanTemplate(onePage: Boolean) extends Template {
         else job.descriptionAll
       )
     }
+  }
+
+  /** Shows a sabbatical entry with no additional details beyond its dates */
+  private def sabbaticalEntry(entry: Sabbatical) = {
+    sectionDataWithDates(entry)(_.dates) { _ =>
+      div(title("Sabbatical"))
+    }
+  }
+
+  private def experienceEntry(entry: ExperienceItem) = entry match {
+    case job: Job              => renderJob(job)
+    case sabbatical: Sabbatical => sabbaticalEntry(sabbatical)
   }
 
   /** Shows an education with its dates */
@@ -216,7 +228,7 @@ class CleanTemplate(onePage: Boolean) extends Template {
         contactInfo(Data.personal)
       ),
       div(cls := "personalDescription")(Data.personal.description),
-      section("Experience", resume.experience.map(job)*),
+      section("Experience", resume.experience.map(experienceEntry)*),
       section("Education", resume.education.map(education)*),
       // Optional sections
       (!onePage).option {

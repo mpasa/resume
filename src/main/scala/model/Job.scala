@@ -9,7 +9,7 @@ final case class Job(
     dates: Dates,
     description: TypedTag[String],
     extra: TypedTag[String]
-) {
+) extends ExperienceItem {
 
   def descriptionAll = Seq(description, extra)
 }

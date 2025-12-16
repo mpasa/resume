@@ -58,6 +58,10 @@ object Data {
     ),
     extra = div("")
   )
+
+  val sabbatical2025 = Sabbatical(
+    dates = Dates(YearMonth.of(2025, 4))
+  )
   
   val engManagerVerve = Job(
     company = "Verve",
@@ -81,6 +85,10 @@ object Data {
     dates = Dates(YearMonth.of(2019, 7), Some(YearMonth.of(2020, 1))),
     description = div(""),
     extra = div("")
+  )
+
+  val sabbatical2018 = Sabbatical(
+    dates = Dates(YearMonth.of(2018, 1), Some(YearMonth.of(2019, 6)))
   )
 
   val dataEngineerTrovit = Job(
@@ -282,12 +290,14 @@ object Data {
   val resume = Resume(
     personalData = personal,
     experience = Seq(
+      sabbatical2025,
       seniorEngineeringManagerVerve,
       engManagerVerve,
-      leadDataEngineerVerve, 
-      dataEngineerPubNative, 
-      dataEngineerTrovit, 
-      webDeveloperTrovit, 
+      leadDataEngineerVerve,
+      dataEngineerPubNative,
+      sabbatical2018,
+      dataEngineerTrovit,
+      webDeveloperTrovit,
       webDeveloperUPC
     ),
     education = Seq(upc),
@@ -295,7 +305,7 @@ object Data {
     languages = Seq(
       NativeLanguage("Spanish"),
       NativeLanguage("Catalan"),
-      ForeignLanguage(name = "English", listening = C1, reading = C1, writing = B2, speaking = B2)
+      ForeignLanguage(name = "English", listening = C1, reading = C1, writing = C1, speaking = C1)
     ),
     publications = Seq(assistiveSocialNetwork)
   )

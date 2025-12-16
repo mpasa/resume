@@ -90,6 +90,10 @@
     text-align: center;
 }
 
+.resume .section .content {
+    margin-bottom: 1.25em;
+}
+
 .resume .section .content .dates .toDate {
     margin: 5px;
 }
@@ -97,4 +101,3 @@
 .resume .section .content .data {
     grid-column: span 10;
 }
-

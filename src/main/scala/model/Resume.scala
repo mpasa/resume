@@ -6,7 +6,7 @@ package me.mpasa.resume.model
   */
 final case class Resume(
     personalData: PersonalData,
-    experience: Seq[Job],
+    experience: Seq[ExperienceItem],
     education: Seq[Education],
     certifications: Seq[Certification],
     languages: Seq[Language],
