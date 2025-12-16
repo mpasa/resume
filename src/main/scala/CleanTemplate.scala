@@ -117,6 +117,10 @@ class CleanTemplate(onePage: Boolean) extends Template {
   /** Subtitle for a section title. They're shown a bit smaller  */
   private def subtitle(text: String) = div(cls := "subtitle")(text)
 
+  private sealed trait ExperienceSection
+  private case class ExperienceCompany(company: String, entries: Seq[Job], dates: Dates) extends ExperienceSection
+  private case class ExperienceSabbatical(entry: Sabbatical) extends ExperienceSection
+
   private def experienceDates(dates: Dates) = {
     val startLabel = dates.start.format(MONTH_FORMATTER)
     val endLabel = dates.end.map(_.format(MONTH_FORMATTER)).getOrElse("Present")
@@ -132,11 +136,57 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
   }
 
+  private def aggregateCompanyDates(entries: Seq[Job]): Dates = {
+    val start = entries.map(_.dates.start).min
+    val hasOpenEnded = entries.exists(_.dates.end.isEmpty)
+    val lastEnd =
+      if (hasOpenEnded) None
+      else entries.flatMap(_.dates.end) match {
+        case Nil => None
+        case seq => Some(seq.max)
+      }
+    Dates(start, lastEnd)
+  }
+
+  private def groupedExperiences(items: Seq[ExperienceItem]): Seq[ExperienceSection] = {
+    val sections = scala.collection.mutable.ArrayBuffer.empty[ExperienceSection]
+    var currentCompany: Option[(String, Vector[Job])] = None
+
+    def flushCompany(): Unit = {
+      currentCompany.foreach {
+        case (company, entries) =>
+          sections += ExperienceCompany(company, entries, aggregateCompanyDates(entries))
+      }
+      currentCompany = None
+    }
+
+    items.foreach {
+      case job: Job =>
+        currentCompany match {
+          case Some((company, entries)) if company == job.company =>
+            currentCompany = Some((company, entries :+ job))
+          case Some(_) =>
+            flushCompany()
+            currentCompany = Some((job.company, Vector(job)))
+          case None =>
+            currentCompany = Some((job.company, Vector(job)))
+        }
+      case sabbatical: Sabbatical =>
+        flushCompany()
+        sections += ExperienceSabbatical(sabbatical)
+    }
+
+    flushCompany()
+    sections.toSeq
+  }
+
   private def jobEntry(job: Job) = {
-    div(cls := "experienceEntry")(
-      div(cls := "experienceEntryHeading")(
-        title(job.title),
-        subtitle(job.company),
+    div(cls := "companyJobEntry")(
+      div(cls := "companyJobHeading")(
+        div(cls := "positionTitle")(
+          span(cls := "positionBullet"),
+          title(job.title)
+        ),
         experienceDates(job.dates)
       ),
       div(cls := "experienceEntryDetails")(
@@ -146,18 +196,30 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
   }
 
+  private def companySection(section: ExperienceCompany) = {
+    div(cls := "block companyBlock")(
+      div(cls := "blockHeader companyBlockHeader")(
+        div(cls := "companyName")(
+          section.company,
+          experienceDates(section.dates)
+        ),
+      ),
+      div(cls := "companyJobs")(section.entries.map(jobEntry)*)
+    )
+  }
+
   private def sabbaticalEntry(entry: Sabbatical) = {
-    div(cls := "experienceEntry")(
-      div(cls := "experienceEntryHeading")(
+    div(cls := "block sabbaticalBlock")(
+      div(cls := "blockHeader sabbaticalHeader")(
         title("Sabbatical"),
         experienceDates(entry.dates)
       )
     )
   }
 
-  private def experienceEntry(entry: ExperienceItem) = entry match {
-    case job: Job => jobEntry(job)
-    case sabbatical: Sabbatical => sabbaticalEntry(sabbatical)
+  private def renderExperienceSection(section: ExperienceSection): TypedTag[String] = section match {
+    case company: ExperienceCompany => companySection(company)
+    case ExperienceSabbatical(entry) => sabbaticalEntry(entry)
   }
 
   /** Shows an education with its dates */
@@ -289,7 +351,7 @@ class CleanTemplate(onePage: Boolean) extends Template {
         contactInfo(Data.personal)
       ),
       div(cls := "personalDescription")(Data.personal.description),
-      section("Experience", resume.experience.map(experienceEntry)*),
+      section("Experience", groupedExperiences(resume.experience).map(renderExperienceSection)*),
       section("Education", resume.education.map(education)*),
       // Optional sections
       (!onePage).option {

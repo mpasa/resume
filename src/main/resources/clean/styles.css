@@ -98,14 +98,69 @@
     margin: 5px;
 }
 
-.resume .section .experienceEntry {
-    padding-top: 1em;
-    border-bottom: 1px dotted #e0e0e0;
-    padding-bottom: 1em;
+.resume .block {
+    margin: 1em 0;
+    padding: 1em 0;
+    border-bottom: 1px dashed gray;
 }
 
-.resume .section .experienceEntryHeading {
-    margin-bottom: 0.5em;
+.resume .section .block:last-child {
+    border-bottom: 0;
+    margin-bottom: 1em;
+    padding-bottom: 0;
+}
+
+.resume .companyBlockHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.resume .companyBlockHeader .companyName {
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.resume .companyJobs {
+    margin-top: 1em;
+}
+
+.resume .companyJobEntry {
+    margin-bottom: 1.25em;
+}
+
+.resume .companyJobHeading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+.resume .companyJobHeading .positionTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+}
+
+.resume .positionBullet {
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 50%;
+    background: currentColor;
+    display: inline-flex;
+}
+
+.resume .sabbaticalHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+}
+
+.resume .experienceEntryDetails {
+    margin-top: 0.5em;
 }
 
 .resume .experienceDates {
@@ -113,17 +168,12 @@
     font-size: 0.9em;
 }
 
-.resume .experienceEntryDetails {
-    margin-top: 0.5em;
-}
-
 .resume .experienceDatesRange {
     font-weight: 500;
 }
 
-.resume .experienceEntry:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
+.resume ul {
+    list-style-type: circle;
 }
 
 .resume .section .content .data {
