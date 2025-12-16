@@ -20,11 +20,8 @@ object Data {
     x = Link(anchor = "Kamugo", url = "https://x.com/Kamugo"),
     webpage = Link(anchor = "mpasa.me", url = "https://mpasa.me"),
     description = div(
-      """
-        I'm Miguel, a Computer Scientist from Barcelona. I'm passionate about data, functional programming (mainly
-        Scala), distributed systems, algorithms and mountains. I'm very pragmatic and demanding with the things I
-        build, but I also love to experiment with new languages and technologies.
-      """
+      p("I’m Miguel, a Computer Scientist from Barcelona with a strong background in large-scale data platforms and distributed systems. I’ve grown from hands-on data engineering into engineering leadership, building and scaling teams responsible for end-to-end data platforms operating at petabyte scale."),
+      p("I’m deeply interested in functional programming (mainly Scala), system design, and pragmatic engineering. I’m demanding about the quality and impact of what I build, with a strong focus on delivering real business value, while continuously experimenting with new languages, technologies, and ideas.")
     )
   )
 
