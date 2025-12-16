@@ -11,7 +11,7 @@ val root = project
     ),
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "scalatags" % "0.13.1",
-      "com.lihaoyi" %% "os-lib" % "0.11.4",
-      "org.typelevel" %% "mouse" % "1.3.2"
+      "com.lihaoyi" %% "os-lib" % "0.11.6",
+      "org.typelevel" %% "mouse" % "1.4.0"
     )
   )

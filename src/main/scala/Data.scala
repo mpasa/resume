@@ -36,7 +36,26 @@ object Data {
     company = "Verve",
     title = "Senior Engineering Manager, Data Platform",
     dates = Dates(YearMonth.of(2023, 9), Some(YearMonth.of(2025, 3))),
-    description = div(""),
+    description = div(
+      p("Verve Group is a global ad platform connecting brands and publishers to people in real-time."),
+      p("Started as a data engineer and transitioned into an engineering manager role, scaling the data team from 2 to 9 engineers. The team owned the end-to-end data platform, spanning infrastructure, ingestion, processing, analytics, and database management, operating at petabyte scale."),
+      p("Focused on delivering business value through modern data technologies while keeping infrastructure growth efficient and cost-aware. Built and led a highly motivated team by promoting technical ownership, continuous learning, and exposure to complex, high-impact problems, ensuring engineers remained challenged while staying aligned with real business needs."),
+      p(
+        "Non-exhaustive tech stack:",
+        ul(
+          li("Scala/Python"),
+          li("Airflow"),
+          li("Apache Spark and Delta"),
+          li("Kubernetes"),
+          li("Kafka"),
+          li("Apache Druid"),
+          li("GCP ecosystem (GCS, BigQuery)"),
+          li("AWS ecosystem (S3, Athena)"),
+          li("Trino"),
+          li("Prometheus/Grafana"),
+        )
+      )
+    ),
     extra = div("")
   )
   
