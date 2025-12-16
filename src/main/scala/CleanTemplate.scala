@@ -64,6 +64,47 @@ class CleanTemplate(onePage: Boolean) extends Template {
     )
   }
 
+  private val experienceDurationScript = script(raw(
+    """
+      document.addEventListener("DOMContentLoaded", function() {
+        const entries = document.querySelectorAll(".experienceDates");
+        entries.forEach(function(el) {
+          const start = el.dataset.start;
+          if (!start) {
+            return;
+          }
+          const startParts = start.split("-");
+          const startDate = new Date(parseInt(startParts[0], 10), parseInt(startParts[1], 10) - 1, 1);
+          const end = el.dataset.end;
+          const endDate = end
+            ? new Date(parseInt(end.split("-")[0], 10), parseInt(end.split("-")[1], 10) - 1, 1)
+            : new Date();
+          const months =
+            (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+            (endDate.getMonth() - startDate.getMonth()) +
+            1;
+          const years = Math.floor(months / 12);
+          const remainingMonths = months % 12;
+          const durationParts = [];
+          if (years > 0) {
+            durationParts.push(`${years} yr${years === 1 ? "" : "s"}`);
+          }
+          if (remainingMonths > 0) {
+            durationParts.push(`${remainingMonths} mo${remainingMonths === 1 ? "" : "s"}`);
+          }
+          const durationSpan = el.querySelector(".experienceDuration");
+          if (durationSpan) {
+            if (durationParts.length > 0) {
+              durationSpan.textContent = ` (${durationParts.join(" ")})`;
+            } else {
+              durationSpan.textContent = "";
+            }
+          }
+        });
+      });
+    """
+  ))
+
   /** Shows a section title with a subtitle */
   private def titleWithSubHeading(ttle: String, organization: String) = div(cls := "heading")(
     title(ttle),
@@ -76,26 +117,46 @@ class CleanTemplate(onePage: Boolean) extends Template {
   /** Subtitle for a section title. They're shown a bit smaller  */
   private def subtitle(text: String) = div(cls := "subtitle")(text)
 
-  /** Shows a job with its dates */
-  private def renderJob(job: Job) = {
-    sectionDataWithDates(job)(_.dates) { job =>
-      div(
-        titleWithSubHeading(job.title, job.company),
+  private def experienceDates(dates: Dates) = {
+    val startLabel = dates.start.format(MONTH_FORMATTER)
+    val endLabel = dates.end.map(_.format(MONTH_FORMATTER)).getOrElse("Present")
+    val endValue = dates.end.map(_.toString).getOrElse("")
+
+    div(
+      cls := "experienceDates",
+      attr("data-start") := dates.start.toString,
+      attr("data-end") := endValue
+    )(
+      span(cls := "experienceDatesRange")(s"$startLabel to $endLabel"),
+      span(cls := "experienceDuration")
+    )
+  }
+
+  private def jobEntry(job: Job) = {
+    div(cls := "experienceEntry")(
+      div(cls := "experienceEntryHeading")(
+        title(job.title),
+        subtitle(job.company),
+        experienceDates(job.dates)
+      ),
+      div(cls := "experienceEntryDetails")(
         if (onePage) job.description
         else job.descriptionAll
       )
-    }
+    )
   }
 
-  /** Shows a sabbatical entry with no additional details beyond its dates */
   private def sabbaticalEntry(entry: Sabbatical) = {
-    sectionDataWithDates(entry)(_.dates) { _ =>
-      div(title("Sabbatical"))
-    }
+    div(cls := "experienceEntry")(
+      div(cls := "experienceEntryHeading")(
+        title("Sabbatical"),
+        experienceDates(entry.dates)
+      )
+    )
   }
 
   private def experienceEntry(entry: ExperienceItem) = entry match {
-    case job: Job              => renderJob(job)
+    case job: Job => jobEntry(job)
     case sabbatical: Sabbatical => sabbaticalEntry(sabbatical)
   }
 
@@ -245,6 +306,8 @@ class CleanTemplate(onePage: Boolean) extends Template {
           ": this is a one-page version of my resume. If you want to read more about me, you can check the full version on https://mpasa.me/resume"
         )
       }
+      ,
+      experienceDurationScript
     )
   }
 }

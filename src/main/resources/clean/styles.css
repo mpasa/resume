@@ -98,6 +98,34 @@
     margin: 5px;
 }
 
+.resume .section .experienceEntry {
+    padding-top: 1em;
+    border-bottom: 1px dotted #e0e0e0;
+    padding-bottom: 1em;
+}
+
+.resume .section .experienceEntryHeading {
+    margin-bottom: 0.5em;
+}
+
+.resume .experienceDates {
+    color: gray;
+    font-size: 0.9em;
+}
+
+.resume .experienceEntryDetails {
+    margin-top: 0.5em;
+}
+
+.resume .experienceDatesRange {
+    font-weight: 500;
+}
+
+.resume .experienceEntry:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
 .resume .section .content .data {
     grid-column: span 10;
 }
