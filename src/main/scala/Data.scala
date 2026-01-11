@@ -29,6 +29,18 @@ object Data {
   //                                                    Experience
   //--------------------------------------------------------------------------------------------------------------------
 
+  val headOfDataEngineeringAppodeal = Job(
+    company = "Appodeal",
+    title = "Head of Data Engineering",
+    dates = Dates(YearMonth.of(2026, 1), None),
+    description = div(""),
+    extra = div("")
+  )
+
+  val sabbatical2025 = Sabbatical(
+    dates = Dates(YearMonth.of(2025, 4), Some(YearMonth.of(2025, 12)))
+  )
+  
   val seniorEngineeringManagerVerve = Job(
     company = "Verve",
     title = "Senior Engineering Manager, Data Platform",
@@ -56,10 +68,6 @@ object Data {
     extra = div("")
   )
 
-  val sabbatical2025 = Sabbatical(
-    dates = Dates(YearMonth.of(2025, 4))
-  )
-  
   val engManagerVerve = Job(
     company = "Verve",
     title = "Engineering Manager, Data Platform",
@@ -287,6 +295,7 @@ object Data {
   val resume = Resume(
     personalData = personal,
     experience = Seq(
+      headOfDataEngineeringAppodeal,
       sabbatical2025,
       seniorEngineeringManagerVerve,
       engManagerVerve,
